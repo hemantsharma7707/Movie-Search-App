@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        header{
+            width: 100%;
+            background-color: black;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h4{
+            font-size: 30px;
+        }
+        .search-container{
+            display: flex;
+            gap: 20px;
+        }
+        .search-container input {
+            width: 300px;
+            border: none;
+            padding: 10px;
+            outline: none;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        .search-container button {
+            border: none;
+            padding: 5px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+        }
+        main{
+            width: 1600px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+        .movie-container{
+            width: 1600px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        .skeleton{
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .skeleton-img{
+            height: 350px;
+            background: linear-gradient(90deg,
+                    #eeeeee 25%,
+                    #dddddd 50%,
+                    #eeeeee 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        .skeleton-content{
+            padding: 15px;
+        }
+        .skeleton-title{
+            height: 20px;
+            width: 80%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: #eeeeee;
+        }
+        .skeleton-text{
+            height: 15px;
+            width: 50%;
+            border-radius: 5px;
+            background: #eeeeee;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        .movie-card{
+            background-color: white;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .movie-card img{
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        .movie-info{
+            padding: 15px;
+        }
+        .movie-info h3{
+            margin-bottom: 8px;
+        }
+        .movie-info p{
+            color: #666;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h4>Movie App</h4>
+        <div class="search-container">
+            <input type="text" placeholder="Enter Movie Name">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Popular Movies</h2>
+        <div class="movie-container">
+            <!-- <div class="skeleton">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-content">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-text"></div>
+            </div>
+        </div> -->
+        <div class="movie-card">
+            <img src="https://imgs.search.brave.com/xXDYt86mIuv4tZDDE6jJLgHTmcdLsBlbGZz5nz2Jfrc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvdGh1bWJu/YWlsL2RlYXRoLW5v/dGUtYmFjay10by1i/YWNrLXdpdGgtbC1o/dHRka3RmYTlhd3l2/NW4zLmpwZw" alt="">
+
+            <div class="movie-info">
+                <h3>Death Note</h3>
+                <p>Written by - Tsugumi Ohba</p>
+                <p>Rating : 10</p>
+            </div>
+
+        </div>
+
+        </div>
+        
+
+    </main>
+
+    <script>
+
+    </script>
+</body>
+</html>
