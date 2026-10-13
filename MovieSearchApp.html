@@ -119,7 +119,7 @@
 
         .movie-card img {
             width: 100%;
-            height: 350px;
+            height: 560px;
             object-fit: cover;
             display: block;
         }
@@ -130,11 +130,16 @@
 
         .movie-info h3 {
             margin-bottom: 8px;
+            font-size: 25px;
         }
 
         .movie-info p {
             color: #666;
-            font-size: 16px;
+            font-size: 20px;
+        }
+        .movie-container h2{
+            color: red;
+            font-size: 40px;
         }
     </style>
 </head>
@@ -157,20 +162,18 @@
     </main>
 
     <script>
-        const APIURL =
-            "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+        const APIURL ="https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+        const IMGPATH ="https://image.tmdb.org/t/p/w1280";
+        const SEARCHAPI ="https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&query=";
 
-        const IMGPATH =
-            "https://image.tmdb.org/t/p/w1280";
-
-        const SEARCHAPI =
-            "https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&query=";
-
-        const movie_container = document.querySelector(".movie-container")
+        const movie_container = document.querySelector(".movie-container");
+        const button = document.querySelector(".search-container button");
+        const input = document.querySelector(".search-container input");
+        const Moviename = document.querySelector(".container h2");
 
         function skeleton() {
-            for (let i = 1; i <= 20; i++){
-                movie_container.innerHTML +=`<div class="skeleton">
+            for (let i = 1; i <= 20; i++) {
+                movie_container.innerHTML += `<div class="skeleton">
             <div class="skeleton-img"></div>
             <div class="skeleton-content">
                 <div class="skeleton-title"></div>
@@ -178,10 +181,13 @@
             </div>`
             }
 
-            }
+        }
 
         function showmovies(movies) {
             movie_container.innerHTML = "";
+            if (movies.length == 0){
+               return movie_container.innerHTML="<h2>No movies found!!</h2>"
+            }
             movies.forEach((movie, index) => {
                 const { title, poster_path, release_date, vote_average } = movie
                 const card = document.createElement("div")
@@ -197,9 +203,14 @@
             })
         }
 
+        function showerror() {
+            movie_container.innerHTML = "";
+            movie_container.innerHTML = `<h1>SOMETHING WENT WRONG!</h1>`
+        }
+
         async function loadpopularmovies() {
-            skeleton()
             try {
+                skeleton()
                 const response = await fetch(APIURL);
                 if (!response.ok) {
                     throw new Error("Api Fetch Failed");
@@ -207,11 +218,30 @@
                 const data = await response.json();
                 showmovies(data.results)
             } catch (error) {
-
+                showerror()
             }
 
         }
         loadpopularmovies()
+
+        button.addEventListener("click", async () => {
+            const query = input.value.trim();
+            Moviename.innerHTML=query
+            if (query === "") {
+                return loadpopularmovies()
+            } try {
+                skeleton()
+                const response = await fetch(SEARCHAPI + query);
+                if (!response.ok) {
+                    throw new Error("Api Fetch Failed");
+                }
+                const data = await response.json();
+                showmovies(data.results)
+
+            } catch (error) {
+                showerror()
+            }
+        })
     </script>
 </body>
 
